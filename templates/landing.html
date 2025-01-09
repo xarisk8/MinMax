@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="{{ url_for('static', filename='theme.js') }}"></script>
+    <!-- Move theme initialization to before any styles -->
+    <script>
+        (function() {
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const theme = savedTheme || (prefersDark ? 'dark' : 'light');
+            document.documentElement.setAttribute('data-theme', theme);
+        })();
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="MinMax - Simple focus timer with task management. Built with the Pomodoro Technique.">
+    <title>MinMax - Focus Timer & Tasks</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='landing.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="landing-page">
+    <div class="auth-nav">
+        <div class="auth-content">
+            <div class="auth-links">
+                <a href="{{ url_for('login') }}">Login</a>
+                <span class="divider">•</span>
+                <a href="{{ url_for('register') }}">Sign Up</a>
+            </div>
+        </div>
+    </div>
+
+    <nav class="landing-nav">
+        <div class="nav-content">
+            <div class="brand">
+                <svg class="logo" width="32" height="32" viewBox="0 0 32 32">
+                    <path d="M16 2L4 8v16l12 6 12-6V8L16 2z" fill="none" stroke="currentColor" stroke-width="2"/>
+                    <path d="M16 2v12m0 4v12M4 8l12 6 12-6" stroke="currentColor" stroke-width="2"/>
+                </svg>
+                <h1>MinMax</h1>
+            </div>
+            <div class="nav-items">
+                <button class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <a href="#features" class="nav-link">Features</a>
+                <a href="{{ url_for('register') }}" class="nav-button">Get Started</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <div class="hero-logo">
+                    <svg class="logo-large" width="64" height="64" viewBox="0 0 32 32">
+                        <path d="M16 2L4 8v16l12 6 12-6V8L16 2z" fill="none" stroke="currentColor" stroke-width="2"/>
+                        <path d="M16 2v12m0 4v12M4 8l12 6 12-6" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                </div>
+                <h1>Focus Timer & Task Manager</h1>
+                <p class="hero-tagline">Minimum Effort, Maximum Results</p>
+                <div class="hero-features">
+                    <div class="feature-pill"><i class="fas fa-clock"></i> Pomodoro Timer</div>
+                    <div class="feature-pill"><i class="fas fa-list-check"></i> Task List</div>
+                    <div class="feature-pill"><i class="fas fa-chart-bar"></i> Progress Tracking</div>
+                </div>
+                <div class="cta-buttons">
+                    <a href="{{ url_for('register') }}" class="cta-primary">Start Now <i class="fas fa-arrow-right"></i></a>
+                    <a href="#features" class="cta-secondary">Learn More</a>
+                </div>
+            </div>
+            <div class="app-preview">
+                <div class="browser-frame">
+                    <div class="browser-header">
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                    </div>
+                    <img src="{{ url_for('static', filename='images/app-preview.png') }}" alt="MinMax app interface">
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="features">
+            <h2>Core Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-clock"></i>
+                    <h3>Focus Timer</h3>
+                    <p>Choose between 25 or 50-minute focus sessions based on the Pomodoro Technique.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-list-check"></i>
+                    <h3>Task Management</h3>
+                    <p>Simple drag-and-drop task list to organize and track your work.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-chart-line"></i>  <!-- Changed from fa-chart-simple -->
+                    <h3>Progress Tracking</h3>
+                    <p>Monitor your daily focus sessions with basic statistics.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Add new section about Pomodoro -->
+        <section class="pomodoro-info">
+            <div class="section-content">
+                <h2>The Science of Focus</h2>
+                <div class="info-grid">
+                    <div class="info-card">
+                        <i class="fas fa-brain"></i>
+                        <h3>Flow State</h3>
+                        <p>The Pomodoro Technique helps you achieve and maintain flow state - a period of heightened focus and productivity - by eliminating distractions and creating structured work intervals.</p>
+                    </div>
+                    <div class="info-card">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>Proven Results</h3>
+                        <p>Research shows that regular breaks enhance mental agility and sustain attention. The technique's 25-50 minute focus sessions are aligned with the brain's natural attention span.</p>
+                    </div>
+                    <div class="info-card">
+                        <i class="fas fa-battery-full"></i>
+                        <h3>Prevent Burnout</h3>
+                        <p>Strategic breaks prevent mental fatigue and decision fatigue, helping you maintain high performance throughout the day while avoiding burnout.</p>
+                    </div>
+                </div>
+                <div class="method-steps">
+                    <h3>How It Works</h3>
+                    <div class="step-grid">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <h4>Choose Duration</h4>
+                            <p>Select either 25 or 50-minute focus session</p>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <h4>Focus</h4>
+                            <p>Work without interruption until the timer ends</p>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <h4>Break</h4>
+                            <p>Take a short 5-10 minute break to recharge</p>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">4</div>
+                            <h4>Repeat</h4>
+                            <p>Continue the cycle to maintain productivity</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <h2>Ready to focus?</h2>
+            <p>Start managing your time more effectively.</p>
+            <div class="final-cta">
+                <a href="{{ url_for('register') }}" class="cta-primary">Create Free Account</a>
+            </div>
+        </section>
+        <footer>
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h2>MinMax</h2>
+                    <p>Minimum Effort, Maximum Results</p>
+                </div>
+                <div class="social-links">
+                    <a href="https://www.linkedin.com/in/ch-karagiannis/" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="https://www.instagram.com/xaris_karagiannis/" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://github.com/xarisk8" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <script>
+        // Add nav background on scroll
+        const nav = document.querySelector('.landing-nav');
+        window.addEventListener('scroll', () => {
+            nav.classList.toggle('scrolled', window.scrollY > 50);
+        });
+    </script>
+</body>
+</html>

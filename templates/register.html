@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="{{ url_for('static', filename='theme.js') }}"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+    <title>Register</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1>MinMax</h1>
+      <p>Create a new account</p>
+      <form method="POST" action="{{ url_for('register') }}">
+        {{ form.hidden_tag() }}
+        <div class="input">
+          {{ form.username(class_="form-control", placeholder="Username") }}
+        </div>
+        <div class="input">
+          {{ form.password(class_="form-control", placeholder="Password") }}
+        </div>
+        <button type="submit" class="custom-btn">Sign Up</button>
+      </form>
+      <hr>
+      <p>Already have an account? <a href="{{ url_for('login') }}">Log In</a></p>
+      <div id="flash-messages"></div>
+      <script id="flash-messages-data" type="application/json">{{ get_flashed_messages(with_categories=true) | tojson }}</script>
+    </div>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const flashMessagesData = document.getElementById('flash-messages-data');
+        if (flashMessagesData) {
+          const flashMessages = JSON.parse(flashMessagesData.textContent);
+          const flashMessagesContainer = document.getElementById('flash-messages');
+          flashMessages.forEach(function(message) {
+            const messageElement = document.createElement('div');
+            messageElement.className = `flash-message ${message[0]}`;
+            messageElement.textContent = message[1];
+            flashMessagesContainer.appendChild(messageElement);
+          });
+          flashMessagesData.remove();
+        }
+      });
+    </script>
+  </body>
+</html>
